@@ -36,6 +36,49 @@ const products = [
   },
 ];
 
+const questionnaire = [
+  {
+    id: 'propertyType',
+    question: 'What type of property is this for?',
+    options: ['House', 'Apartment / Flat', 'Small business', 'Farm / Plot'],
+  },
+  {
+    id: 'goal',
+    question: 'What matters most to you?',
+    options: [
+      'Backup during load shedding',
+      'Lower monthly bills',
+      'Going fully off-grid',
+      'Not sure yet',
+    ],
+  },
+  {
+    id: 'backupHours',
+    question: 'How long should the battery keep you running?',
+    options: ['2–4 hours', '4–8 hours', '8–12 hours', 'A full day or more'],
+  },
+  {
+    id: 'roof',
+    question: 'What is your roof like?',
+    options: ['Corrugated metal', 'Tiled', 'Flat concrete', 'Ground mount / no roof'],
+  },
+  {
+    id: 'budget',
+    question: 'What budget range are you working with?',
+    options: [
+      'Under BWP 30,000',
+      'BWP 30,000 – 60,000',
+      'BWP 60,000 – 100,000',
+      'Over BWP 100,000',
+    ],
+  },
+  {
+    id: 'timeline',
+    question: 'When would you like to install?',
+    options: ['As soon as possible', 'Within 3 months', 'In 3–6 months', 'Just researching'],
+  },
+];
+
 const inverterPrices = {
   '3kW': 6500,
   '5kW': 8500,
@@ -59,6 +102,16 @@ export default function SolarEnergyPlatform() {
     routers: 1,
     monthlyBill: 800,
   });
+
+  const [answers, setAnswers] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const answeredCount = questionnaire.filter((item) => answers[item.id]).length;
+
+  const selectAnswer = (questionId, option) => {
+    setSubmitted(false);
+    setAnswers((current) => ({ ...current, [questionId]: option }));
+  };
 
   const updateField = (key, value) => {
     const parsed = Number(value);
@@ -257,22 +310,77 @@ export default function SolarEnergyPlatform() {
 
       <section className="px-6 lg:px-20 py-16">
         <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold mb-2">Tell us about your needs</h2>
-          <p className="text-gray-600 mb-6">
-            Share any details — backup hours, business load, roof space — and our team
-            will refine the recommendation.
+          <h2 className="text-3xl font-semibold mb-2">Tell us about your energy needs</h2>
+          <p className="text-gray-600 mb-8">
+            Answer a few quick questions and our team will refine your recommendation.
+            <span className="block text-sm text-gray-500 mt-1">
+              {answeredCount} of {questionnaire.length} answered
+            </span>
           </p>
-          <textarea
-            rows="5"
-            placeholder="Tell us about your energy needs"
-            className="w-full border border-gray-300 rounded-2xl px-5 py-4"
-          />
-          <button
-            type="button"
-            className="mt-4 bg-black text-white px-8 py-4 rounded-2xl font-medium"
+
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSubmitted(true);
+            }}
+            className="space-y-8"
           >
-            Send enquiry
-          </button>
+            {questionnaire.map((item) => (
+              <fieldset key={item.id}>
+                <legend className="font-medium mb-3">{item.question}</legend>
+                <div className="flex flex-wrap gap-3">
+                  {item.options.map((option) => {
+                    const selected = answers[item.id] === option;
+                    return (
+                      <label
+                        key={option}
+                        className={`cursor-pointer rounded-2xl border px-5 py-3 text-sm transition-colors ${
+                          selected
+                            ? 'border-black bg-black text-white'
+                            : 'border-gray-300 bg-white text-gray-700 hover:border-gray-500'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name={item.id}
+                          value={option}
+                          checked={selected}
+                          onChange={() => selectAnswer(item.id, option)}
+                          className="sr-only"
+                        />
+                        {option}
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))}
+
+            <fieldset>
+              <legend className="font-medium mb-3">Anything else we should know?</legend>
+              <textarea
+                rows="4"
+                value={answers.notes ?? ''}
+                onChange={(event) => selectAnswer('notes', event.target.value)}
+                placeholder="Optional — roof space, business load, existing equipment…"
+                className="w-full border border-gray-300 rounded-2xl px-5 py-4"
+              />
+            </fieldset>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="submit"
+                className="bg-black text-white px-8 py-4 rounded-2xl font-medium"
+              >
+                Send enquiry
+              </button>
+              {submitted && (
+                <p role="status" className="text-green-700">
+                  Thanks — we&apos;ve got your answers and will be in touch.
+                </p>
+              )}
+            </div>
+          </form>
         </div>
       </section>
 
