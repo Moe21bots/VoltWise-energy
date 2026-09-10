@@ -234,7 +234,7 @@ export default function SolarEnergyPlatform() {
 
       <section className="relative overflow-hidden px-6 lg:px-20 py-16 lg:py-24">
         {/* Animated sky + sun background */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <div aria-hidden="true" className="absolute inset-0 z-0">
           <div className="animate-sky absolute inset-0" />
 
           {/* The travelling sun */}
@@ -260,7 +260,7 @@ export default function SolarEnergyPlatform() {
           </div>
         </div>
 
-        <div className="relative max-w-3xl mb-12">
+        <div className="relative z-10 max-w-3xl mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4 text-white drop-shadow">
             How the sun becomes your power
           </h2>
@@ -271,7 +271,7 @@ export default function SolarEnergyPlatform() {
           </p>
         </div>
 
-        <div className="relative mx-auto max-w-4xl mt-56 sm:mt-64 grid gap-6 md:grid-cols-3">
+        <div className="relative z-10 mx-auto max-w-4xl mt-56 sm:mt-64 grid gap-6 md:grid-cols-3">
           {solarBasics.map((step, index) => (
             <div
               key={step.title}
@@ -289,7 +289,7 @@ export default function SolarEnergyPlatform() {
           ))}
         </div>
 
-        <div className="relative mx-auto max-w-4xl mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
+        <div className="relative z-10 mx-auto max-w-4xl mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
           {solarFacts.map((fact) => (
             <div
               key={fact.label}
