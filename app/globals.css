@@ -17,3 +17,56 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Sun arcing from left to right across the solar panel scene */
+@keyframes sun-arc {
+  0% {
+    left: 6%;
+    top: 55%;
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+  50% {
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    left: 94%;
+    top: 55%;
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+}
+
+.animate-sun-arc {
+  animation: sun-arc 12s ease-in-out infinite alternate;
+}
+
+@keyframes sun-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 40px 10px rgba(250, 204, 21, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 70px 22px rgba(250, 204, 21, 0.85);
+  }
+}
+
+.animate-sun-glow {
+  animation: sun-glow 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sun-arc,
+  .animate-sun-glow {
+    animation: none;
+  }
+
+  .animate-sun-arc {
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%, -50%);
+  }
+}

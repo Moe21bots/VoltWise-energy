@@ -79,6 +79,47 @@ const questionnaire = [
   },
 ];
 
+const solarFacts = [
+  {
+    stat: '3,200+',
+    label: 'Sun hours a year',
+    desc: 'Botswana gets some of the highest solar irradiation on Earth — among the best places anywhere to generate solar power.',
+  },
+  {
+    stat: '25 yrs',
+    label: 'Typical panel life',
+    desc: 'Modern panels are warrantied for 25 years and keep producing well beyond that, quietly paying for themselves over time.',
+  },
+  {
+    stat: '~1 hr',
+    label: 'Sunlight powers the world',
+    desc: 'The energy the sun delivers to Earth in a single hour is more than humanity uses in an entire year.',
+  },
+  {
+    stat: '0 g',
+    label: 'CO₂ while generating',
+    desc: 'Once installed, panels produce clean electricity with no fuel, no emissions and almost no moving parts to maintain.',
+  },
+];
+
+const solarBasics = [
+  {
+    icon: '☀️',
+    title: 'Sunlight hits the panel',
+    desc: 'Photovoltaic cells absorb sunlight and knock electrons loose, creating direct current (DC) electricity.',
+  },
+  {
+    icon: '🔌',
+    title: 'The inverter converts it',
+    desc: 'An inverter turns DC into the alternating current (AC) your home appliances actually run on.',
+  },
+  {
+    icon: '🔋',
+    title: 'Batteries store the extra',
+    desc: 'Energy you do not use during the day is stored in batteries to keep the lights on at night or during load shedding.',
+  },
+];
+
 const inverterPrices = {
   '3kW': 6500,
   '5kW': 8500,
@@ -188,6 +229,70 @@ export default function SolarEnergyPlatform() {
           >
             Start the calculator
           </a>
+        </div>
+      </section>
+
+      <section className="px-6 lg:px-20 py-16 lg:py-24 bg-gradient-to-b from-sky-50 to-white">
+        <div className="max-w-3xl mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
+            How the sun becomes your power
+          </h2>
+          <p className="text-lg text-gray-600">
+            Watch the sun travel across the sky — every ray that lands on a panel
+            is turned into clean electricity for your home. Here is how it works,
+            and why it makes so much sense in Botswana.
+          </p>
+        </div>
+
+        <div className="relative mx-auto max-w-4xl h-72 sm:h-80 lg:h-96 overflow-hidden rounded-[36px] border border-amber-100 bg-gradient-to-b from-sky-200 via-sky-100 to-amber-50">
+          <div
+            aria-hidden="true"
+            className="animate-sun-arc animate-sun-glow absolute h-16 w-16 rounded-full bg-yellow-400"
+          />
+
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
+            <div className="grid grid-cols-4 gap-1 rounded-lg bg-slate-800 p-2 shadow-xl [transform:perspective(600px)_rotateX(35deg)]">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="h-8 w-10 sm:h-10 sm:w-14 rounded-sm bg-gradient-to-br from-sky-500 to-blue-900 ring-1 ring-sky-300/40"
+                />
+              ))}
+            </div>
+            <div className="h-16 w-2 bg-slate-700" />
+            <div className="h-3 w-40 rounded-t-md bg-slate-600" />
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-4xl mt-12 grid gap-6 md:grid-cols-3">
+          {solarBasics.map((step, index) => (
+            <div
+              key={step.title}
+              className="rounded-3xl border border-gray-200 bg-white p-6"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-3xl">{step.icon}</span>
+                <span className="text-sm font-semibold text-yellow-600">
+                  Step {index + 1}
+                </span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-600 text-sm">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-auto max-w-4xl mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
+          {solarFacts.map((fact) => (
+            <div
+              key={fact.label}
+              className="rounded-3xl border border-amber-100 bg-amber-50 p-6"
+            >
+              <p className="text-3xl font-bold text-yellow-600 mb-1">{fact.stat}</p>
+              <p className="font-medium mb-2">{fact.label}</p>
+              <p className="text-gray-600 text-sm">{fact.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
