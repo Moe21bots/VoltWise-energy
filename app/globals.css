@@ -21,19 +21,19 @@ body {
 /* Realistic sky that shifts from dawn to midday to dusk as the sun travels */
 @keyframes sky-cycle {
   0% {
-    background: linear-gradient(to bottom, #1b2a4a 0%, #6b4a6b 45%, #d98a5a 80%, #f2b56b 100%);
+    background: linear-gradient(to bottom, #05070f 0%, #0f1533 45%, #331d3a 80%, #5c3320 100%);
   }
   25% {
-    background: linear-gradient(to bottom, #4a7bc0 0%, #8fb8e0 45%, #cfe3f5 80%, #f4e6c8 100%);
+    background: linear-gradient(to bottom, #0a1230 0%, #16214d 45%, #24305e 80%, #3a2b3f 100%);
   }
   50% {
-    background: linear-gradient(to bottom, #2f7fd6 0%, #79b4e8 45%, #bfe0f7 80%, #eef7ff 100%);
+    background: linear-gradient(to bottom, #0d1b45 0%, #1c2c63 45%, #2b3f78 80%, #3c527f 100%);
   }
   75% {
-    background: linear-gradient(to bottom, #4a7bc0 0%, #8fb8e0 45%, #cfe3f5 80%, #f4e6c8 100%);
+    background: linear-gradient(to bottom, #0a1230 0%, #16214d 45%, #24305e 80%, #3a2b3f 100%);
   }
   100% {
-    background: linear-gradient(to bottom, #1b2a4a 0%, #6b4a6b 45%, #d98a5a 80%, #f2b56b 100%);
+    background: linear-gradient(to bottom, #05070f 0%, #0f1533 45%, #331d3a 80%, #5c3320 100%);
   }
 }
 
@@ -117,7 +117,7 @@ body {
   }
 
   .animate-sky {
-    background: linear-gradient(to bottom, #2f7fd6 0%, #79b4e8 45%, #bfe0f7 80%, #eef7ff 100%);
+    background: linear-gradient(to bottom, #0d1b45 0%, #1c2c63 45%, #2b3f78 80%, #3c527f 100%);
   }
 
   .animate-sun-arc {
