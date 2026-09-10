@@ -232,43 +232,50 @@ export default function SolarEnergyPlatform() {
         </div>
       </section>
 
-      <section className="px-6 lg:px-20 py-16 lg:py-24 bg-gradient-to-b from-sky-50 to-white">
-        <div className="max-w-3xl mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
+      <section className="relative overflow-hidden px-6 lg:px-20 py-16 lg:py-24">
+        {/* Animated sky + sun background */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <div className="animate-sky absolute inset-0" />
+
+          {/* The travelling sun */}
+          <div className="animate-sun-arc absolute h-40 w-40 sm:h-56 sm:w-56">
+            <div className="animate-sun-rays absolute inset-0 [background:repeating-conic-gradient(rgba(255,236,160,0.35)_0deg_6deg,transparent_6deg_18deg)] [mask-image:radial-gradient(circle,transparent_30%,black_31%,black_70%,transparent_72%)]" />
+            <div className="animate-sun-pulse sun-body absolute inset-0 rounded-full blur-[2px]" />
+            <div className="sun-body absolute inset-[28%] rounded-full" />
+          </div>
+
+          {/* Ground + solar panel silhouette */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-emerald-900/50 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
+            <div className="grid grid-cols-6 gap-1 rounded-lg bg-slate-900/85 p-2 shadow-2xl [transform:perspective(800px)_rotateX(40deg)]">
+              {Array.from({ length: 18 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="h-8 w-9 sm:h-10 sm:w-12 rounded-sm bg-gradient-to-br from-sky-400/90 to-blue-950 ring-1 ring-sky-200/30"
+                />
+              ))}
+            </div>
+            <div className="h-14 w-2.5 bg-slate-800" />
+            <div className="h-3 w-44 rounded-t-md bg-slate-700" />
+          </div>
+        </div>
+
+        <div className="relative max-w-3xl mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4 text-white drop-shadow">
             How the sun becomes your power
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-white/90 drop-shadow">
             Watch the sun travel across the sky — every ray that lands on a panel
             is turned into clean electricity for your home. Here is how it works,
             and why it makes so much sense in Botswana.
           </p>
         </div>
 
-        <div className="relative mx-auto max-w-4xl h-72 sm:h-80 lg:h-96 overflow-hidden rounded-[36px] border border-amber-100 bg-gradient-to-b from-sky-200 via-sky-100 to-amber-50">
-          <div
-            aria-hidden="true"
-            className="animate-sun-arc animate-sun-glow absolute h-16 w-16 rounded-full bg-yellow-400"
-          />
-
-          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
-            <div className="grid grid-cols-4 gap-1 rounded-lg bg-slate-800 p-2 shadow-xl [transform:perspective(600px)_rotateX(35deg)]">
-              {Array.from({ length: 12 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="h-8 w-10 sm:h-10 sm:w-14 rounded-sm bg-gradient-to-br from-sky-500 to-blue-900 ring-1 ring-sky-300/40"
-                />
-              ))}
-            </div>
-            <div className="h-16 w-2 bg-slate-700" />
-            <div className="h-3 w-40 rounded-t-md bg-slate-600" />
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-4xl mt-12 grid gap-6 md:grid-cols-3">
+        <div className="relative mx-auto max-w-4xl mt-56 sm:mt-64 grid gap-6 md:grid-cols-3">
           {solarBasics.map((step, index) => (
             <div
               key={step.title}
-              className="rounded-3xl border border-gray-200 bg-white p-6"
+              className="rounded-3xl border border-white/40 bg-white/80 p-6 backdrop-blur-sm"
             >
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">{step.icon}</span>
@@ -282,11 +289,11 @@ export default function SolarEnergyPlatform() {
           ))}
         </div>
 
-        <div className="mx-auto max-w-4xl mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
+        <div className="relative mx-auto max-w-4xl mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
           {solarFacts.map((fact) => (
             <div
               key={fact.label}
-              className="rounded-3xl border border-amber-100 bg-amber-50 p-6"
+              className="rounded-3xl border border-white/40 bg-white/80 p-6 backdrop-blur-sm"
             >
               <p className="text-3xl font-bold text-yellow-600 mb-1">{fact.stat}</p>
               <p className="font-medium mb-2">{fact.label}</p>

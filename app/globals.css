@@ -18,55 +18,111 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Sun arcing from left to right across the solar panel scene */
+/* Realistic sky that shifts from dawn to midday to dusk as the sun travels */
+@keyframes sky-cycle {
+  0% {
+    background: linear-gradient(to bottom, #1b2a4a 0%, #6b4a6b 45%, #d98a5a 80%, #f2b56b 100%);
+  }
+  25% {
+    background: linear-gradient(to bottom, #4a7bc0 0%, #8fb8e0 45%, #cfe3f5 80%, #f4e6c8 100%);
+  }
+  50% {
+    background: linear-gradient(to bottom, #2f7fd6 0%, #79b4e8 45%, #bfe0f7 80%, #eef7ff 100%);
+  }
+  75% {
+    background: linear-gradient(to bottom, #4a7bc0 0%, #8fb8e0 45%, #cfe3f5 80%, #f4e6c8 100%);
+  }
+  100% {
+    background: linear-gradient(to bottom, #1b2a4a 0%, #6b4a6b 45%, #d98a5a 80%, #f2b56b 100%);
+  }
+}
+
+.animate-sky {
+  animation: sky-cycle 24s ease-in-out infinite;
+}
+
+/* Sun arcing from left to right across the sky */
 @keyframes sun-arc {
   0% {
-    left: 6%;
-    top: 55%;
-    transform: translate(-50%, -50%) scale(0.85);
-    opacity: 0.7;
+    left: 4%;
+    top: 78%;
+    transform: translate(-50%, -50%) scale(0.8);
   }
   50% {
     left: 50%;
-    top: 8%;
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 1;
+    top: 14%;
+    transform: translate(-50%, -50%) scale(1.05);
   }
   100% {
-    left: 94%;
-    top: 55%;
-    transform: translate(-50%, -50%) scale(0.85);
-    opacity: 0.7;
+    left: 96%;
+    top: 78%;
+    transform: translate(-50%, -50%) scale(0.8);
   }
 }
 
 .animate-sun-arc {
-  animation: sun-arc 12s ease-in-out infinite alternate;
+  animation: sun-arc 24s ease-in-out infinite;
 }
 
-@keyframes sun-glow {
+/* Soft radiant sun body: a bright core fading into a warm glow */
+.sun-body {
+  background: radial-gradient(
+    circle at center,
+    #fffdf2 0%,
+    #fff2b8 22%,
+    #ffd54a 45%,
+    rgba(255, 193, 60, 0.55) 62%,
+    rgba(255, 170, 50, 0.18) 78%,
+    rgba(255, 170, 50, 0) 100%
+  );
+}
+
+/* Gentle pulsing halo around the sun */
+@keyframes sun-pulse {
   0%,
   100% {
-    box-shadow: 0 0 40px 10px rgba(250, 204, 21, 0.55);
+    opacity: 0.55;
+    transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 70px 22px rgba(250, 204, 21, 0.85);
+    opacity: 0.85;
+    transform: scale(1.12);
   }
 }
 
-.animate-sun-glow {
-  animation: sun-glow 4s ease-in-out infinite;
+.animate-sun-pulse {
+  animation: sun-pulse 6s ease-in-out infinite;
+}
+
+/* Slowly rotating sun rays */
+@keyframes sun-rays {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-sun-rays {
+  animation: sun-rays 40s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .animate-sky,
   .animate-sun-arc,
-  .animate-sun-glow {
+  .animate-sun-pulse,
+  .animate-sun-rays {
     animation: none;
+  }
+
+  .animate-sky {
+    background: linear-gradient(to bottom, #2f7fd6 0%, #79b4e8 45%, #bfe0f7 80%, #eef7ff 100%);
   }
 
   .animate-sun-arc {
     left: 50%;
-    top: 8%;
+    top: 14%;
     transform: translate(-50%, -50%);
   }
 }
